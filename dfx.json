@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "tco_icp_sales_chatbot_backend": {
+      "main": "src/tco_icp_sales_chatbot_backend/main.mo",
+      "type": "motoko"
+    },
+    "tco_icp_sales_chatbot_frontend": {
+      "dependencies": [
+        "tco_icp_sales_chatbot_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/tco_icp_sales_chatbot_frontend/src/index.html"
+      },
+      "source": [
+        "src/tco_icp_sales_chatbot_frontend/assets",
+        "dist/tco_icp_sales_chatbot_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
