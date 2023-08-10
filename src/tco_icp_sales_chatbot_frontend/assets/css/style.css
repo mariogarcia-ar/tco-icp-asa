@@ -1,0 +1,39 @@
+.icon-hover:hover {
+  border-color: #3b71ca !important;
+  background-color: white !important;
+}
+
+.icon-hover:hover i {
+  color: #3b71ca !important;
+}
+#wrapper-chat2{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: transparent;
+  z-index: 999999;
+  display: none;
+}
+#chat2 .form-control {
+  border-color: transparent;
+  }
+  #chat2 .card-body{
+    overflow: auto;
+  }
+  #chat2 .form-control:focus {
+  border-color: transparent;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+  }
+  
+  .divider:after,
+  .divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+  }
+
+  i.selected {
+    border-color: #3b71ca !important;
+    color: #3b71ca !important;
+}
