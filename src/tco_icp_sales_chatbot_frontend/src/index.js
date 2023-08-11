@@ -30,6 +30,22 @@ document.serviceGetProducts = async function(){
     return response;
 }
 
+
+document.serviceFilterProducts = async function(title){
+    const products = await tco_icp_sales_chatbot_backend.filterProducts(title);
+
+    var response = [];
+    for(let idx in products){
+        var id = products[idx][0];
+        var product = products[idx][1];
+        product['id'] = id;
+        response.push(product)
+    }
+    // console.log(response);
+    return response;
+}
+
+
 console.log('Ready: src/tco_icp_sales_chatbot_frontend/src/index.js');
 
 // document.querySelector("form").addEventListener("submit", async (e) => {
