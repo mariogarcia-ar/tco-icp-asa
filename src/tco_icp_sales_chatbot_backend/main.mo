@@ -1,6 +1,6 @@
 import Text "mo:base/Text";
 // import List "mo:base/List";
-import Nat "mo:base/Nat";
+import Float "mo:base/Float";
 import TrieMap "mo:base/TrieMap";
 // import Principal "mo:base/Principal";
 import Debug "mo:base/Debug";
@@ -10,6 +10,9 @@ actor {
   // public type Owner = Principal;
   public type Key = Text;
 
+  // --------------------------------------------------------------------------
+  // Blog
+  // --------------------------------------------------------------------------
   public type Blog ={
     title: Text;
     image: Text;
@@ -71,14 +74,78 @@ actor {
   };
   
   // --------------------------------------------------------------------------
+  // Product
+  // --------------------------------------------------------------------------
+  public type Product ={
+    title: Text;
+    image: Text;
+    price: Float;
+  };
+  
+  stable var productsBackup: [(Key, Product)] = [];
+  var products = TrieMap.fromEntries<Key, Product>(productsBackup.vals(), Text.equal, Text.hash);
+
+  
+  // --------------------------------------------------------------------------
+  // Product CRUD
+  // --------------------------------------------------------------------------
+  // LIST
+  public query func getProducts(): async [(Key, Product)]{
+    return Iter.toArray(products.entries());
+  };
+
+  public query func filterProducts(filter: Text) : async [(Key, Product)] {
+    Iter.toArray(
+        TrieMap.mapFilter<Key, Product, Product>(
+          products, Text.equal, Text.hash, func(k, v) {
+            if (Text.contains(v.title, #text filter)) {
+                ?v
+            } else {
+                null
+            }
+          }
+        ).entries()
+      );
+  };
+
+  // CREATE
+  public func createProduct(key: Text, product: Product): async Product{
+    products.put(key, product);
+    return product;
+  };
+
+  // READ
+  public query func showProduct(key: Text): async ?Product{
+    return products.get(key);
+  };
+
+  // UPDATE
+  public func updateProduct(key: Text, product: Product): async Text{
+    switch(products.get(key)){
+      case (null){ return "Error: product doesn't exists."};
+      case (_){ 
+        products.put(key, product);
+        return "The product has been updated."
+      };
+    }
+  };
+
+  // DELETE
+  public func destroyProduct(key: Text): async (){
+    products.delete(key);
+  };
+
+  // --------------------------------------------------------------------------
   // System
   // --------------------------------------------------------------------------
   system func preupgrade(){
     blogsBackup := Iter.toArray(blogs.entries());
+    productsBackup := Iter.toArray(products.entries());
   };
 
   system func postupgrade(){
       blogsBackup := [];
+      productsBackup := [];
   }
 
 };
