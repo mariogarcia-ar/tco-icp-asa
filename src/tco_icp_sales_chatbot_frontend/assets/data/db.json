@@ -40,19 +40,19 @@
       "id": "prod2",
       "title": "Canon camera 20x zoom, Black color EOS 2000",
       "image": "/img/products/2.webp",
-      "price": 320
+      "price": 320.5
     },
     {
       "id": "prod3",
       "title": "Xiaomi Redmi 8 Original Global Version 4GB",
       "image": "/img/products/3.webp",
-      "price": 120
+      "price": 120.5
     },
     {
       "id": "prod4",
-      "title": "Apple iPhone 12 Pro 6.1\" RAM 6GB 512GB Unlocked",
+      "title": "Apple iPhone 12 Pro 6.1 RAM 6GB 512GB Unlocked",
       "image": "/img/products/4.webp",
-      "price": 120
+      "price": 120.5
     },
     {
       "id": "prod5",
@@ -64,7 +64,7 @@
       "id": "prod6",
       "title": "T-shirts with multiple colors, for men and lady",
       "image": "/img/products/6.webp",
-      "price": 120
+      "price": 120.5
     },
     {
       "id": "prod7",
@@ -76,7 +76,7 @@
       "id": "prod8",
       "title": "T-shirts with multiple colors, for lady",
       "image": "/img/products/8.webp",
-      "price": 120
+      "price": 120.5
     }
   ]
 }
