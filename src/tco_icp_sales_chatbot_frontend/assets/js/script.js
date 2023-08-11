@@ -8,6 +8,26 @@ $( document ).ready(function() {
     var chat_path = jQuery('#wrapper-chat2');
     var chat_close = jQuery('#chat2-close');
     
+    
+    var search = jQuery('#search');
+    var search_timer = 0;
+    async function product_search (){ 
+        var title = search.val();
+        if (title == ""){
+            render_products();
+            return false; 
+        } 
+
+        jQuery('#wrapper_products div.row div.d-flex').remove()
+        var products = await filter_products(title);
+        jQuery.each(products, function(i, item) {
+            render_product(item)
+        })
+    }
+    search.on('keyup', function(e){
+        if (search_timer) clearTimeout(search_timer);
+        search_timer = setTimeout(product_search, 400); 
+    });
 
     // ------------------------------------------------------------------------
     // Products
@@ -15,10 +35,12 @@ $( document ).ready(function() {
     var tpl_product = jQuery('#tpl_product');
     var wrapper_products = jQuery('#wrapper_products .row');
 
+    async function filter_products(title){
+        return document.serviceFilterProducts(title);
+    }
+
     function get_products(){
-        return $.get('/data/db.json').then(function(resp){
-            return resp.products;
-        });
+        return document.serviceGetProducts();
     }
     function render_product(item){
         var itemTpl = tpl_product.text().split(/\$\{(.+?)\}/g);
@@ -39,9 +61,7 @@ $( document ).ready(function() {
     var wrapper_blogs = jQuery('#wrapper_blogs .row');
 
     function get_blogs(){
-        return $.get('/data/db.json').then(function(resp){
-            return resp.blogs;
-        });
+        return document.serviceGetBlogs();
     }
     function render_blog(item){
         var itemTpl = tpl_blog.text().split(/\$\{(.+?)\}/g);
@@ -68,6 +88,7 @@ $( document ).ready(function() {
     });
 
     // ------------------------------------------------------------------------
+    console.log('Ready: src/tco_icp_sales_chatbot_frontend/assets/js/script.js');
     render_products();
     render_blogs();
 });

@@ -23,7 +23,7 @@ dfx start --background
 ## Frontend
 
 ```bash
-dfx deploy 
+rm -rf dist && dfx cache delete && dfx deploy
 ```
 
 ## Candidate Interface
