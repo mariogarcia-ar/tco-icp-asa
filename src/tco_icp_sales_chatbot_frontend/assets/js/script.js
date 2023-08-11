@@ -16,9 +16,10 @@ $( document ).ready(function() {
     var wrapper_products = jQuery('#wrapper_products .row');
 
     function get_products(){
-        return $.get('/data/db.json').then(function(resp){
-            return resp.products;
-        });
+        return document.serviceGetProducts();
+        // return $.get('/data/db.json').then(function(resp){
+        //     return resp.products;
+        // });
     }
     function render_product(item){
         var itemTpl = tpl_product.text().split(/\$\{(.+?)\}/g);
@@ -39,9 +40,10 @@ $( document ).ready(function() {
     var wrapper_blogs = jQuery('#wrapper_blogs .row');
 
     function get_blogs(){
-        return $.get('/data/db.json').then(function(resp){
-            return resp.blogs;
-        });
+        return document.serviceGetBlogs();
+        // return $.get('/data/db.json').then(function(resp){
+        //     return resp.blogs;
+        // });
     }
     function render_blog(item){
         var itemTpl = tpl_blog.text().split(/\$\{(.+?)\}/g);
@@ -68,6 +70,7 @@ $( document ).ready(function() {
     });
 
     // ------------------------------------------------------------------------
+    console.log('Ready: src/tco_icp_sales_chatbot_frontend/assets/js/script.js');
     render_products();
     render_blogs();
 });
